@@ -1,5 +1,5 @@
 from tkinter import *
-
+import navigation as nav
 
 class Statusbar(Frame):
 	def __init__(self, parent, *args, **kwargs):
@@ -17,10 +17,16 @@ class Mainbody(Frame):
 		# Main screen title
 		title = Label(self, text="pyTime")
 		title.config(font=("Courier", 36))
-		title.grid(row=0,column=0)
+		title.grid(row=0,column=0, columnspan=5)
 		
-		description = Label(self, text="this is an example of what I may have as a description just to check\nhow it formats and if it even works in the first place, i hope this isn't\npicked up as some weird doc reference i just want to display a\nparagraph tbh.", justify=LEFT)
-		description.grid(row=1,sticky=W)
+		MOTD = Label(self, text="Thanks for taking part in the testing of pyTime!\n\n", justify=LEFT)
+		MOTD.config(font=("Courier", 10))
+		MOTD.grid(row=1,sticky=W, columnspan=5)
+		
+		LoginButton = Button(self, text="Log in", command=nav.login)
+		LoginButton.grid(row=2, column=2)
+		RegisterButton = Button(self, text="Register", command=nav.register)
+		RegisterButton.grid(row=3, column=2)
 		
 		# Image implementation for future reference.
 		#splash = PhotoImage(file="splash.png")
@@ -34,41 +40,20 @@ class Navbar(Frame):
 		Frame.__init__(self, parent, *args, **kwargs)
 		self.parent = parent
 		
-		# ***** Navigation bar functionality *****
-		# Account > Login
-		def nav_login():
-			print("Login button clicked.")
-			
-		# Account > Register
-		def nav_register():
-			print("Register button clicked.")
-		
-		# Help > Documentation
-		def nav_documentation():
-			print("Documentation button clicked.")
-		
-		# Help > Support
-		def nav_support():
-			print("Support button clicked.")
-		
-		# Help > FAQ
-		def nav_faq():
-			print("FAQ button clicked.")
-		
 		# ***** Navigation bar layout *****
 		menu = Menu(root)
 		root.config(menu=menu)
 		
 		# Account menu option
 		accountMenu = Menu(menu, tearoff=0)
-		accountMenu.add_command(label="Login", command=nav_login)
-		accountMenu.add_command(label="Register", command=nav_register)
+		accountMenu.add_command(label="Login", command=nav.login)
+		accountMenu.add_command(label="Register", command=nav.register)
 		
 		# Help menu option
 		helpMenu = Menu(menu, tearoff=0)
-		helpMenu.add_command(label="Documentation", command=nav_documentation)
-		helpMenu.add_command(label="Support", command=nav_support)
-		helpMenu.add_command(label="FAQ", command=nav_faq)
+		helpMenu.add_command(label="Documentation", command=nav.documentation)
+		helpMenu.add_command(label="Support", command=nav.support)
+		helpMenu.add_command(label="FAQ", command=nav.faq)
 		
 		# Adding menu options to navigation menus
 		menu.add_cascade(label="Account", menu=accountMenu)
@@ -90,5 +75,7 @@ if __name__ == "__main__":
 	root = Tk()
 	root.title(" pyTime")
 	root.iconbitmap("C:\clock.ico")
+	root.geometry("400x300")
+	root.resizable(0, 0)
 	GUI(root).pack()
 	root.mainloop()
