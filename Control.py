@@ -7,6 +7,26 @@ class Statusbar(Frame):
 		self.parent = parent
 		status = Label(root, text="Idle", bd=1, relief=SUNKEN, anchor=W)
 		status.pack(side=BOTTOM, fill=X)
+
+
+class Mainbody(Frame):
+	def __init__(self, parent, *args, **kwargs):
+		Frame.__init__(self, parent, *args, **kwargs)
+		self.parent = parent
+		
+		# Main screen title
+		title = Label(self, text="pyTime")
+		title.config(font=("Courier", 36))
+		title.grid(row=0,column=0)
+		
+		description = Label(self, text="this is an example of what I may have as a description just to check\nhow it formats and if it even works in the first place, i hope this isn't\npicked up as some weird doc reference i just want to display a\nparagraph tbh.", justify=LEFT)
+		description.grid(row=1,sticky=W)
+		
+		# Image implementation for future reference.
+		#splash = PhotoImage(file="splash.png")
+		#splashImage = Label(self, image=splash)
+		#splashImage.image = splash
+		#splashImage.grid(row=0,column=0)
 		
 		
 class Navbar(Frame):
@@ -62,11 +82,13 @@ class GUI(Frame):
 		self.statusbar = Statusbar(self)
 		self.navbar = Navbar(self)
 		self.statusbar.pack()
+		self.mainbody = Mainbody(self)
+		self.mainbody.pack()
 
 
 if __name__ == "__main__":
 	root = Tk()
 	root.title(" pyTime")
 	root.iconbitmap("C:\clock.ico")
-	GUI(root).pack(side="top", fill="both", expand=True)
+	GUI(root).pack()
 	root.mainloop()
