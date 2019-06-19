@@ -1,3 +1,4 @@
+##### This Repository is one my 3 currently active repos, these are the repositories I'm currently focused on.
 # pyTime
 A Python T&A client to interact with a remote database to keep track of what users have been doing, where they've been doing it and for how long.
 
