@@ -33,6 +33,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="templates\login.html" />
+    <Content Include="templates\register.html" />
     <None Include="CustomProfile.pubxml" />
     <Content Include="static\main.css" />
     <Content Include="requirements.txt" />

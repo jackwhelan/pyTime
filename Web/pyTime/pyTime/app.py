@@ -1,9 +1,6 @@
-"""
-This script runs the application using a development server.
-It contains the definition of routes and views for the application.
-"""
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import RegistrationForm, LoginForm
 
-from flask import Flask, render_template, url_for
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7a81d54bcbe122a84e2f1c100e2a67db'
 
@@ -31,12 +28,24 @@ wsgi_app = app.wsgi_app
 @app.route('/home')
 @app.route('/changelog')
 def home():
-    """Renders a sample page."""
     return render_template('home.html', posts=posts)
 
 @app.route('/about')
 def about():
 	return render_template('about.html', title='About')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+	form = RegistrationForm()
+	if form.validate_on_submit():
+		flash(f'Account created for {form.username.data}!', 'success')
+		return  redirect(url_for('home'))
+	return render_template('register.html', title='Register', form=form)
+
+@app.route('/login')
+def login():
+	form = LoginForm()
+	return render_template('login.html', title='Login', form=form)
 
 if __name__ == '__main__':
     app.run(
