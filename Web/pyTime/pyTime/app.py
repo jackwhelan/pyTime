@@ -5,6 +5,7 @@ It contains the definition of routes and views for the application.
 
 from flask import Flask, render_template, url_for
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '7a81d54bcbe122a84e2f1c100e2a67db'
 
 posts = [
 	{
